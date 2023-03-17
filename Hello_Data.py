@@ -41,3 +41,16 @@ unique_month_desc = data['expiration_month'].sort_values(ascending=False).unique
 
 # Print the unique values in descending order
 print(unique_month_desc)
+
+
+# APPLYING ONE HOT ENCODING
+# Use the pandas get_dummies() function to one-hot encode the "expiration_month" column
+one_hot = pd.get_dummies(data['expiration_month'])
+
+# Rename the columns to be more descriptive
+one_hot.columns = ['month_'+str(i) for i in range(1,13)]
+
+# Concatenate the one-hot encoded data back onto the original dataframe
+data = pd.concat([data, one_hot], axis=1)
+
+data.head()
